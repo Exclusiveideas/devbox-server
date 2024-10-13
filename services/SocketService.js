@@ -89,7 +89,7 @@ class SocketService {
       console.log("Error compiling data:", error);
     }
   }
-
+ 
   async receiveCompiledData(token) {
     const options = {
       method: "GET",
