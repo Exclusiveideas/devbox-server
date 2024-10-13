@@ -1,6 +1,7 @@
 //PTYService.js
 const os = require("os");
 const pty = require("node-pty");
+const { stripAnsiCodes } = require("../functions");
 
 class PTY {
   constructor(socket) {
@@ -41,28 +42,18 @@ class PTY {
  
   sendToClient(data) {
     // Emit data to socket.io client in an event "output"
-
-    console.log('prenormalized data: ', data)
-    const cleanData = this.stripAnsiCodes(data);
+    const cleanData = stripAnsiCodes(data);
     const normalizedData = cleanData.replace(/\r?\n/g, "\r\n");
 
-    // const matchedOutput = normalizedData.match(/>> (\S+)/);
-    
-    console.log('normalizedData: ', normalizedData)
+    const matchedOutput = normalizedData.match(/>> (\S+)/);
 
     if (normalizedData) {
-    this.socket.emit("output", normalizedData);
+    this.socket.emit("output", normalizedData[1]);
     }
 
   }
 
-  // Helper function to strip ANSI escape codes
-  stripAnsiCodes(input) {
-    return input.replace(
-      /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-ntqry=><]/g,
-      ""
-    );
-  }
+
 }
 
 module.exports = PTY;

@@ -3,6 +3,7 @@
 const socketIO = require("socket.io");
 const PTYService = require("./PTYService");
 const axios = require("axios");
+const { stripAnsiCodes } = require("../functions");
 
 class SocketService {
   constructor() {
@@ -44,7 +45,7 @@ class SocketService {
       });
 
       // Create a new pty service when client connects.
-      this.pty = new PTYService(this.socket);
+      // this.pty = new PTYService(this.socket);
 
       // Attach event listener for socket.io
       this.socket.on("input", async (input) => {
@@ -53,7 +54,7 @@ class SocketService {
         try {
           const apiResponse = await this.sendCompileRequest(decodedMessage);
 
-          this.pty.write(apiResponse);
+          this.sendToClient(apiResponse);
         } catch (error) {
           console.log("Error compiling data:", error);
           this.pty.write("Error compiling data: You might have reached your compilation limit for today");
@@ -122,6 +123,12 @@ class SocketService {
     } catch (error) {
       console.log("Error compiling data:", error);
     }
+  }
+
+
+  sendToClient(data) {
+    // Emit data to socket.io client in an event "output"
+    this.socket.emit("output", data);
   }
 }
 
