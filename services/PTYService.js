@@ -42,14 +42,17 @@ class PTY {
   sendToClient(data) {
     // Emit data to socket.io client in an event "output"
 
+    console.log('prenormalized data: ', data)
     const cleanData = this.stripAnsiCodes(data);
     const normalizedData = cleanData.replace(/\r?\n/g, "\r\n");
 
     const matchedOutput = normalizedData.match(/>> (\S+)/);
+    
+    console.log('normalizedData: ', normalizedData)
 
-    // if (match) {
+    if (match) {
     this.socket.emit("output", matchedOutput);
-    // }
+    }
 
   }
 
