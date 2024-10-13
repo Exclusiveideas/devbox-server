@@ -50,7 +50,7 @@ class PTY {
     
     console.log('normalizedData: ', normalizedData)
 
-    if (match) {
+    if (matchedOutput) {
     this.socket.emit("output", matchedOutput);
     }
 
