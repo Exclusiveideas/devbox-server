@@ -83,6 +83,7 @@ class SocketService {
     try {
       const { data } = await axios.request(options);
       const compiledData = await this.receiveCompiledData(data.token);
+      console.log('compiled data: ', compiledData)
       return compiledData;
     } catch (error) {
       console.log("Error compiling data:", error);
