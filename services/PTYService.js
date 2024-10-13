@@ -46,11 +46,11 @@ class PTY {
     const cleanData = this.stripAnsiCodes(data);
     const normalizedData = cleanData.replace(/\r?\n/g, "\r\n");
 
-    const matchedOutput = normalizedData.match(/>> (\S+)/);
+    // const matchedOutput = normalizedData.match(/>> (\S+)/);
     
     console.log('normalizedData: ', normalizedData)
 
-    if (matchedOutput) {
+    if (normalizedData) {
     this.socket.emit("output", matchedOutput);
     }
 
