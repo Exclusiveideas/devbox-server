@@ -38,7 +38,7 @@ class PTY {
   write(data) {
     this.ptyProcess.write(data + "\n");
   }
-
+ 
   sendToClient(data) {
     // Emit data to socket.io client in an event "output"
 
