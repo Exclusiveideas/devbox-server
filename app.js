@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 
 const server = app.listen(PORT, () => {
   console.log("Server listening on : ", PORT);
@@ -32,3 +32,6 @@ const server = app.listen(PORT, () => {
   // We are going to pass server to socket.io in SocketService.js
    socketService.attachServer(server);
 });
+
+server.keepAliveTimeout = 120 * 1000;
+server.headersTimeout = 120 * 1000;
