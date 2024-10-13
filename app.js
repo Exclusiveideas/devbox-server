@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 3001;
 
 const server = app.listen(PORT, () => {
-  console.log("Server listening on : ", PORT);
+  console.log("Server listening on port: ", PORT);
 
   const socketService = new SocketService();
 

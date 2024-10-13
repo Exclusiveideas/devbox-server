@@ -68,8 +68,8 @@ class SocketService {
       url: "https://judge0-ce.p.rapidapi.com/submissions",
       params: { fields: "*" },
       headers: {
-        "x-rapidapi-key": "37a02fdb29mshf1d79efa7ce95ebp1aac32jsnbb5e86fe18bb",
-        "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
+        "x-rapidapi-key": process.env.X_RAPIDAPI_KEY,
+        "x-rapidapi-host": process.env.X_RAPIDAPI_HOST,
         "Content-Type": "application/json",
       },
       data: {
@@ -98,8 +98,8 @@ class SocketService {
         fields: "*",
       },
       headers: {
-        "x-rapidapi-key": "37a02fdb29mshf1d79efa7ce95ebp1aac32jsnbb5e86fe18bb",
-        "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
+        "x-rapidapi-key": process.env.X_RAPIDAPI_KEY,
+        "x-rapidapi-host": process.env.X_RAPIDAPI_HOST,
       },
     };
 
